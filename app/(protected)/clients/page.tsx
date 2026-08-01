@@ -1,0 +1,74 @@
+import Link from "next/link";
+import { getClients } from "@/lib/actions/clients";
+
+export default async function ClientsPage() {
+  const clients = await getClients();
+
+  return (
+    <main className="min-h-screen bg-slate-50">
+      <div className="mx-auto max-w-7xl px-6 py-10">
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-4xl font-bold text-slate-900">
+              Client Management
+            </h1>
+
+            <p className="mt-2 text-slate-600">
+              Manage all your clients from one place.
+            </p>
+          </div>
+
+          <Link
+            href="/clients/new"
+            className="rounded-lg bg-indigo-600 px-5 py-3 font-medium text-white hover:bg-indigo-700"
+          >
+            + Add Client
+          </Link>
+        </div>
+
+        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          {clients.length === 0 ? (
+            <div className="py-16 text-center">
+              <h2 className="text-2xl font-semibold text-slate-800">
+                No Clients Found
+              </h2>
+
+              <p className="mt-2 text-slate-500">
+                Start by adding your first client.
+              </p>
+            </div>
+          ) : (
+            <table className="min-w-full">
+              <thead className="bg-slate-100">
+                <tr>
+                <th className="px-6 py-3 text-left font-semibold text-slate-700">Name</th>
+                <th className="px-6 py-3 text-left font-semibold text-slate-700">Mobile</th>
+                <th className="px-6 py-3 text-left font-semibold text-slate-700">Email</th>
+                <th className="px-6 py-3 text-left font-semibold text-slate-700">City</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {clients.map((client) => (
+                  <tr
+                    key={client.id}
+                    className="border-t border-slate-200"
+                  >
+                    <td className="px-6 py-4 text-slate-900">{client.full_name}</td>
+                    <td className="px-6 py-4 text-slate-900">{client.mobile_number}</td>
+                    <td className="px-6 py-4 text-slate-900">
+                      {client.email || "-"}
+                    </td>
+                    <td className="px-6 py-4 text-slate-900">
+                      {client.city || "-"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </main>
+  );
+}
