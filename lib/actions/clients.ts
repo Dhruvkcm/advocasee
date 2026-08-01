@@ -119,3 +119,28 @@ export async function updateClient(
   revalidatePath("/clients");
   redirect("/clients");
 }
+
+export async function deleteClient(id: string) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw new Error("You must be logged in.");
+  }
+
+  const { error } = await supabase
+    .from("clients")
+    .delete()
+    .eq("id", id)
+    .eq("owner_id", user.id);
+
+  if (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+
+  revalidatePath("/clients");
+}

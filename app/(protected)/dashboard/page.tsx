@@ -40,7 +40,7 @@ export default async function DashboardPage() {
               Total Clients
             </p>
 
-            <h2 className="mt-2 text-4xl font-bold">
+            <h2 className="mt-2 text-4xl font-bold text-slate-900">
               {dashboard.totalClients}
             </h2>
           </div>
@@ -50,7 +50,7 @@ export default async function DashboardPage() {
               Total Cases
             </p>
 
-            <h2 className="mt-2 text-4xl font-bold">
+            <h2 className="mt-2 text-4xl font-bold text-slate-900">
               {dashboard.totalCases}
             </h2>
           </div>

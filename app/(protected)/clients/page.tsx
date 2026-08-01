@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getClients } from "@/lib/actions/clients";
+import { getClients, deleteClient } from "@/lib/actions/clients";
+import DeleteButton from "@/components/clients/deletebutton";
 
 export default async function ClientsPage() {
   const clients = await getClients();
@@ -41,11 +42,21 @@ export default async function ClientsPage() {
             <table className="min-w-full">
               <thead className="bg-slate-100">
                 <tr>
-                <th className="px-6 py-3 text-left font-semibold text-slate-700">Name</th>
-                <th className="px-6 py-3 text-left font-semibold text-slate-700">Mobile</th>
-                <th className="px-6 py-3 text-left font-semibold text-slate-700">Email</th>
-                <th className="px-6 py-3 text-left font-semibold text-slate-700">City</th>
-                <th className="px-6 py-3 text-left font-semibold text-slate-700">Actions</th>
+                  <th className="px-6 py-3 text-left font-semibold text-slate-700">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left font-semibold text-slate-700">
+                    Mobile
+                  </th>
+                  <th className="px-6 py-3 text-left font-semibold text-slate-700">
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-left font-semibold text-slate-700">
+                    City
+                  </th>
+                  <th className="px-6 py-3 text-left font-semibold text-slate-700">
+                    Actions
+                  </th>
                 </tr>
               </thead>
 
@@ -55,26 +66,36 @@ export default async function ClientsPage() {
                     key={client.id}
                     className="border-t border-slate-200"
                   >
-                    <td className="px-6 py-4 text-slate-900">{client.full_name}</td>
-                    <td className="px-6 py-4 text-slate-900">{client.mobile}</td>
-                    <td className="px-6 py-4 text-slate-900">{client.email || "-"}</td>
-                    <td className="px-6 py-4 text-slate-900">{client.city || "-"}</td>
-                    <td className="px-6 py-4">
-  <div className="flex gap-2">
-  <Link
-  href={`/clients/${client.id}/edit`}
-  className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium text-white hover:bg-indigo-700"
->
-  Edit
-</Link>
+                    <td className="px-6 py-4 text-slate-900">
+                      {client.full_name}
+                    </td>
 
-    <button
-      className="rounded-md bg-red-600 px-3 py-1 text-sm font-medium text-white hover:bg-red-700"
-    >
-      Delete
-    </button>
-  </div>
-</td>
+                    <td className="px-6 py-4 text-slate-900">
+                      {client.mobile}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-900">
+                      {client.email || "-"}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-900">
+                      {client.city || "-"}
+                    </td>
+
+                    <td className="px-6 py-4">
+                      <div className="flex gap-2">
+                        <Link
+                          href={`/clients/${client.id}/edit`}
+                          className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium text-white hover:bg-indigo-700"
+                        >
+                          Edit
+                        </Link>
+
+                        <DeleteButton
+                          action={deleteClient.bind(null, client.id)}
+                        />
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
