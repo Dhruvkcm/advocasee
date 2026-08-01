@@ -1,10 +1,18 @@
 "use client";
 
+import { Client } from "@/types/client";
+
 type ClientFormProps = {
   action: (formData: FormData) => void | Promise<void>;
+  client?: Client | null;
+  buttonText?: string;
 };
 
-export default function ClientForm({ action }: ClientFormProps) {
+export default function ClientForm({
+  action,
+  client,
+  buttonText = "Save Client",
+}: ClientFormProps) {
   return (
     <form action={action} className="space-y-6">
       <div>
@@ -20,7 +28,8 @@ export default function ClientForm({ action }: ClientFormProps) {
           name="full_name"
           type="text"
           required
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none"
+          defaultValue={client?.full_name ?? ""}
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
         />
       </div>
 
@@ -37,7 +46,8 @@ export default function ClientForm({ action }: ClientFormProps) {
           name="mobile"
           type="text"
           required
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none"
+          defaultValue={client?.mobile ?? ""}
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
         />
       </div>
 
@@ -53,7 +63,8 @@ export default function ClientForm({ action }: ClientFormProps) {
           id="email"
           name="email"
           type="email"
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none"
+          defaultValue={client?.email ?? ""}
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
         />
       </div>
 
@@ -69,7 +80,8 @@ export default function ClientForm({ action }: ClientFormProps) {
           id="address"
           name="address"
           rows={3}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none"
+          defaultValue={client?.address ?? ""}
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
         />
       </div>
 
@@ -85,7 +97,8 @@ export default function ClientForm({ action }: ClientFormProps) {
           id="city"
           name="city"
           type="text"
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none"
+          defaultValue={client?.city ?? ""}
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
         />
       </div>
 
@@ -101,15 +114,16 @@ export default function ClientForm({ action }: ClientFormProps) {
           id="notes"
           name="notes"
           rows={4}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none"
+          defaultValue={client?.notes ?? ""}
+          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
-        className="rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white hover:bg-indigo-700"
+        className="rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white transition hover:bg-indigo-700"
       >
-        Save Client
+        {buttonText}
       </button>
     </form>
   );

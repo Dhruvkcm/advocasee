@@ -45,6 +45,7 @@ export default async function ClientsPage() {
                 <th className="px-6 py-3 text-left font-semibold text-slate-700">Mobile</th>
                 <th className="px-6 py-3 text-left font-semibold text-slate-700">Email</th>
                 <th className="px-6 py-3 text-left font-semibold text-slate-700">City</th>
+                <th className="px-6 py-3 text-left font-semibold text-slate-700">Actions</th>
                 </tr>
               </thead>
 
@@ -55,13 +56,25 @@ export default async function ClientsPage() {
                     className="border-t border-slate-200"
                   >
                     <td className="px-6 py-4 text-slate-900">{client.full_name}</td>
-                    <td className="px-6 py-4 text-slate-900">{client.mobile_number}</td>
-                    <td className="px-6 py-4 text-slate-900">
-                      {client.email || "-"}
-                    </td>
-                    <td className="px-6 py-4 text-slate-900">
-                      {client.city || "-"}
-                    </td>
+                    <td className="px-6 py-4 text-slate-900">{client.mobile}</td>
+                    <td className="px-6 py-4 text-slate-900">{client.email || "-"}</td>
+                    <td className="px-6 py-4 text-slate-900">{client.city || "-"}</td>
+                    <td className="px-6 py-4">
+  <div className="flex gap-2">
+  <Link
+  href={`/clients/${client.id}/edit`}
+  className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium text-white hover:bg-indigo-700"
+>
+  Edit
+</Link>
+
+    <button
+      className="rounded-md bg-red-600 px-3 py-1 text-sm font-medium text-white hover:bg-red-700"
+    >
+      Delete
+    </button>
+  </div>
+</td>
                   </tr>
                 ))}
               </tbody>
