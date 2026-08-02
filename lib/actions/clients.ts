@@ -38,7 +38,7 @@ export async function addClient(formData: FormData) {
   const mobile = formData.get("mobile")?.toString().trim() ?? "";
   const email = formData.get("email")?.toString().trim() ?? "";
   const address = formData.get("address")?.toString().trim() ?? "";
-  const city = formData.get("city")?.toString().trim() ?? "";
+  const district = formData.get("district")?.toString().trim() ?? "";
   const notes = formData.get("notes")?.toString().trim() ?? "";
 
   const { error } = await supabase.from("clients").insert({
@@ -47,7 +47,7 @@ export async function addClient(formData: FormData) {
     mobile,
     email,
     address,
-    city,
+    district,
     notes,
   });
 
@@ -95,7 +95,7 @@ export async function updateClient(
   const mobile = formData.get("mobile")?.toString().trim() ?? "";
   const email = formData.get("email")?.toString().trim() ?? "";
   const address = formData.get("address")?.toString().trim() ?? "";
-  const city = formData.get("city")?.toString().trim() ?? "";
+  const district = formData.get("district")?.toString().trim() ?? "";
   const notes = formData.get("notes")?.toString().trim() ?? "";
 
   const { error } = await supabase
@@ -105,7 +105,7 @@ export async function updateClient(
       mobile,
       email,
       address,
-      city,
+      district,
       notes,
     })
     .eq("id", id)

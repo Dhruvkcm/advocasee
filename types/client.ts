@@ -4,7 +4,7 @@ export interface Client {
     mobile: string;
     email: string | null;
     address: string | null;
-    city: string | null;
+    district: string | null;
     notes: string | null;
     created_at: string;
   }

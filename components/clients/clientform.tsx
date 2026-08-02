@@ -1,6 +1,7 @@
 "use client";
 
 import { Client } from "@/types/client";
+import { gujaratDistricts } from "@/lib/constants/gujaratdistricts";
 
 type ClientFormProps = {
   action: (formData: FormData) => void | Promise<void>;
@@ -68,39 +69,33 @@ export default function ClientForm({
         />
       </div>
 
-      <div>
-        <label
-          htmlFor="address"
-          className="mb-2 block text-sm font-medium text-slate-700"
-        >
-          Address
-        </label>
-
-        <textarea
-          id="address"
-          name="address"
-          rows={3}
-          defaultValue={client?.address ?? ""}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
-        />
-      </div>
 
       <div>
-        <label
-          htmlFor="city"
-          className="mb-2 block text-sm font-medium text-slate-700"
-        >
-          City
-        </label>
+  <label
+    htmlFor="district"
+    className="mb-2 block text-sm font-medium text-slate-700"
+  >
+    District
+  </label>
 
-        <input
-          id="city"
-          name="city"
-          type="text"
-          defaultValue={client?.city ?? ""}
-          className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
-        />
-      </div>
+  <select
+    id="district"
+    name="district"
+    defaultValue={client?.district ?? ""}
+    className="w-full rounded-lg border border-slate-300 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:outline-none"
+  >
+    <option value="">Select District</option>
+
+    {gujaratDistricts.map((district) => (
+      <option
+        key={district}
+        value={district}
+      >
+        {district}
+      </option>
+    ))}
+  </select>
+</div> 
 
       <div>
         <label

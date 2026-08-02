@@ -52,7 +52,7 @@ export default async function ClientsPage() {
                     Email
                   </th>
                   <th className="px-6 py-3 text-left font-semibold text-slate-700">
-                    City
+                    District
                   </th>
                   <th className="px-6 py-3 text-left font-semibold text-slate-700">
                     Actions
@@ -66,9 +66,14 @@ export default async function ClientsPage() {
                     key={client.id}
                     className="border-t border-slate-200"
                   >
-                    <td className="px-6 py-4 text-slate-900">
-                      {client.full_name}
-                    </td>
+                    <td className="px-6 py-4">
+  <Link
+    href={`/clients/${client.id}`}
+    className="font-medium text-indigo-600 hover:underline"
+  >
+    {client.full_name}
+  </Link>
+</td>
 
                     <td className="px-6 py-4 text-slate-900">
                       {client.mobile}
@@ -79,7 +84,7 @@ export default async function ClientsPage() {
                     </td>
 
                     <td className="px-6 py-4 text-slate-900">
-                      {client.city || "-"}
+                      {client.district || "-"}
                     </td>
 
                     <td className="px-6 py-4">
